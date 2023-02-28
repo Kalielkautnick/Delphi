@@ -1,3 +1,5 @@
+///ESSE √â O C√ìDIGO DO EDITOR SQL QUE EU FIZ NO MEU SISTEMA EM DELPHI -- KALIEL.
+
 unit U_Editor_SQL;
 
 interface
@@ -109,7 +111,7 @@ end;
 
 procedure Tfrm_editor_sql.bt_consultarClick(Sender: TObject);
 begin
-select;
+select();
 end;
 
 procedure Tfrm_editor_sql.bt_executarClick(Sender: TObject);
@@ -118,7 +120,7 @@ begin
 sql := edt_editor.SelText;
 if (sql = '') then
 begin
- Application.MessageBox('Para executar um comando no editor SQL, deve-se sempre selecionar o texto', 'Editor SQL - ValidaÁ„o', MB_OK);
+ Application.MessageBox('Para executar um comando no editor SQL, deve-se sempre selecionar o texto', 'Editor SQL - Valida√ß√£o', MB_OK);
  abort;
 end
 else if sql <> '' then
@@ -137,9 +139,9 @@ label_registros.Caption := 'Registros: 0'
 end
 else if (validaWhere(sql) = false) then
      begin
-      if Application.MessageBox('Deseja rodar um comando sem where?', 'ConfirmaÁ„o', MB_YESNO or MB_ICONQUESTION)=IDYES then
+      if Application.MessageBox('Deseja rodar um comando sem where?', 'Confirma√ß√£o', MB_YESNO or MB_ICONQUESTION)=IDYES then
       begin
-        if Application.MessageBox('Tem certeza que deseja rodar um comando sem where?', 'ConfirmaÁ„o', MB_YESNO or MB_ICONQUESTION)=IDYES then
+        if Application.MessageBox('Tem certeza que deseja rodar um comando sem where?', 'Confirma√ß√£o', MB_YESNO or MB_ICONQUESTION)=IDYES then
         begin
 executeSQL;
 
@@ -153,11 +155,11 @@ label_registros.Caption := 'Registros: 0'
 end
 else if pos('DROP', sql) > 0 then
 begin
- Application.MessageBox('N„o È permitido executar o comando DROP pelo editor SQL', 'ValidaÁ„o de seguranÁa', MB_OK);
+ Application.MessageBox('N√£o √© permitido executar o comando DROP pelo editor SQL', 'Valida√ß√£o de seguran√ßa', MB_OK);
 end
 else if pos('CREATE', sql) > 0 then
 begin
- Application.MessageBox('N„o È permitido executar o comando CREATE pelo editor SQL', 'ValidaÁ„o de seguranÁa', MB_OK);
+ Application.MessageBox('N√£o √© permitido executar o comando CREATE pelo editor SQL', 'Valida√ß√£o de seguran√ßa', MB_OK);
 end;
      end;
 end;
@@ -193,7 +195,6 @@ end;
 procedure Tfrm_editor_sql.edt_consulta_tabChange(Sender: TObject);
 var i : Integer;
 begin
-query_tabelas.Close;
 query_tabelas.Params.Clear;
 query_tabelas.SQL.Clear;
 query_tabelas.SQL.Add('SELECT * FROM TABELAS ');
@@ -244,9 +245,9 @@ limpaQuery();
                    end;
               try
               query_busca.ExecSQL;
-              showMessage('Foram alterados ou excluÌdos: ' + (intToStr(query_busca.RowsAffected)) + ' registros.');
+              showMessage('Foram alterados ou exclu√≠dos: ' + (intToStr(query_busca.RowsAffected)) + ' registros.');
              except
-                 Application.MessageBox('SQL Inv·lido para execuÁ„o', 'SQL', MB_OK);
+                 Application.MessageBox('SQL Inv√°lido para execu√ß√£o', 'SQL', MB_OK);
               end;
             end;
 end;
@@ -322,7 +323,7 @@ limpaQuery;
               query_busca.Open;
               label_registros.Caption := 'Registros: ' + intToStr(query_busca.RecordCount);
              except
-                 Application.MessageBox('SQL Inv·lido para consulta', 'Erro de sintaxe SQL', MB_OK);
+                 Application.MessageBox('SQL Inv√°lido para consulta', 'Erro de sintaxe SQL', MB_OK);
               end;
 
 end;
@@ -346,7 +347,7 @@ procedure Tfrm_editor_sql.ProcCorPalavra(Palavra: string; Cor: TColor);
         edt_editor.SelStart := SelStartAux;
         edt_editor.SelLength := Length(Palavra);
         edt_editor.SelAttributes.Color := Cor;
-        Inc(SelStartAux, Length(Palavra)); // posiciona o inÌcio da prÛxima pesquisa apÛs a palavra encontrada
+        Inc(SelStartAux, Length(Palavra)); // posiciona o in√≠cio da pr√≥xima pesquisa ap√≥s a palavra encontrada
         SelStartAux := edt_editor.FindText(Palavra, SelStartAux, Length(edt_editor.Text) - SelStartAux + 1, [stWholeWord]);
       end;
     edt_editor.SelStart := SelStartBak;
